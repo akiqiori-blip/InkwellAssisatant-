@@ -3,145 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Emma｜行政助理系統</title>
+<title>Emma｜行政助理</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --g1:#1e3a1a;--g2:#2d5a27;--g3:#3d7a35;--gl:#e8f5e3;--gp:#f4faf2;
-  --ink:#1c1c1a;--ink2:#5a5a56;--ink3:#9a9a96;
-  --bg:#f8f7f2;--card:#ffffff;
-  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);
-  --r:12px;--rs:8px;
-}
+:root{--g1:#1e3a1a;--g2:#2d5a27;--g3:#3d7a35;--gl:#e8f5e3;--gp:#f4faf2;--ink:#1c1c1a;--ink2:#5a5a56;--ink3:#9a9a96;--bg:#f8f7f2;--card:#fff;--border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);--r:12px;--rs:8px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;}
-
-/* Header */
 header{background:var(--g1);height:56px;display:flex;align-items:center;padding:0 20px;gap:12px;position:sticky;top:0;z-index:20;}
-.h-av{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:16px;}
+.h-av{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:16px;}
 .h-name{font-size:14px;font-weight:500;color:#fff;}
-.h-sub{font-size:11px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:4px;}
+.h-sub{font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:4px;}
 .online-dot{width:6px;height:6px;border-radius:50%;background:#6ee7b7;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .h-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
-.admin-btn{font-size:11px;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.07);padding:5px 12px;border-radius:99px;border:0.5px solid rgba(255,255,255,0.12);cursor:pointer;font-family:'Noto Sans TC',sans-serif;transition:all .15s;}
-.admin-btn:hover{background:rgba(255,255,255,0.14);color:rgba(255,255,255,0.8);}
-.admin-btn.active{background:rgba(255,200,50,0.15);border-color:rgba(255,200,50,0.3);color:rgba(255,220,100,0.9);}
-
-/* Layout */
+.admin-btn{font-size:11px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.07);padding:5px 12px;border-radius:99px;border:.5px solid rgba(255,255,255,.12);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+.admin-btn.active{background:rgba(255,200,50,.15);border-color:rgba(255,200,50,.3);color:rgba(255,220,100,.9);}
+.admin-tag{display:inline-flex;align-items:center;font-size:10px;padding:2px 7px;border-radius:99px;background:rgba(255,200,50,.12);color:rgba(255,200,50,.9);border:.5px solid rgba(255,200,50,.25);margin-left:6px;}
 .layout{flex:1;display:flex;max-width:980px;width:100%;margin:0 auto;padding:20px 14px;gap:16px;}
-
-/* Sidebar */
 .sidebar{width:200px;flex-shrink:0;}
-.s-card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px;}
-.s-av{width:52px;height:52px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 10px;border:1.5px solid rgba(61,122,53,0.15);}
+.s-card{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px;}
+.s-av{width:52px;height:52px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 10px;border:1.5px solid rgba(61,122,53,.15);}
 .s-name{text-align:center;font-size:14px;font-weight:500;margin-bottom:2px;}
 .s-role{text-align:center;font-size:11px;color:var(--ink2);margin-bottom:12px;}
-.s-div{height:0.5px;background:var(--border);margin-bottom:12px;}
-.s-item{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--ink2);margin-bottom:8px;line-height:1.5;}
-
-/* Admin lock badge */
-.lock-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 7px;border-radius:99px;background:#fef3c7;color:#92400e;border:0.5px solid #fde68a;margin-top:6px;}
-
-/* Tab nav */
-.tab-nav{display:flex;gap:4px;background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:4px;margin-bottom:10px;}
-.tab-btn{flex:1;padding:8px 4px;font-size:12px;font-weight:500;border:none;border-radius:8px;background:transparent;color:var(--ink2);cursor:pointer;transition:all .15s;font-family:'Noto Sans TC',sans-serif;}
+.s-div{height:.5px;background:var(--border);margin-bottom:12px;}
+.s-item{font-size:12px;color:var(--ink2);margin-bottom:7px;line-height:1.5;}
+.tab-nav{display:flex;gap:4px;background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:4px;margin-bottom:10px;}
+.tab-btn{flex:1;padding:8px 4px;font-size:12px;font-weight:500;border:none;border-radius:8px;background:transparent;color:var(--ink2);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
 .tab-btn.active{background:var(--g2);color:#fff;}
 .tab-btn:hover:not(.active){background:var(--gl);color:var(--g2);}
-
-/* Main */
 .main{flex:1;min-width:0;display:flex;flex-direction:column;}
 .tab-panel{display:none;flex-direction:column;flex:1;}
 .tab-panel.active{display:flex;}
-
 /* Chat */
-.chat-box{flex:1;background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:16px;min-height:380px;max-height:460px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;margin-bottom:10px;scroll-behavior:smooth;}
-.chat-box::-webkit-scrollbar{width:3px;}
-.chat-box::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+.chat-box{flex:1;background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:16px;min-height:360px;max-height:440px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;margin-bottom:10px;scroll-behavior:smooth;}
 .msg{display:flex;gap:9px;align-items:flex-end;animation:up .2s ease;}
 @keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .msg.user{flex-direction:row-reverse;}
 .m-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;background:var(--gl);color:var(--g2);}
 .msg.user .m-av{background:#eff6ff;color:#2563eb;}
-.bubble{background:var(--gp);border:0.5px solid rgba(61,122,53,0.1);border-radius:12px 12px 12px 3px;padding:9px 13px;font-size:13.5px;line-height:1.65;color:var(--ink);max-width:80%;}
+.bubble{background:var(--gp);border:.5px solid rgba(61,122,53,.1);border-radius:12px 12px 12px 3px;padding:9px 13px;font-size:13.5px;line-height:1.65;color:var(--ink);max-width:80%;}
 .msg.user .bubble{background:var(--g2);color:#fff;border-color:transparent;border-radius:12px 12px 3px 12px;}
-.typing-bub{background:var(--gp);border:0.5px solid rgba(61,122,53,0.1);border-radius:12px 12px 12px 3px;padding:11px 14px;display:inline-flex;gap:4px;align-items:center;}
+.typing-bub{background:var(--gp);border:.5px solid rgba(61,122,53,.1);border-radius:12px 12px 12px 3px;padding:11px 14px;display:inline-flex;gap:4px;align-items:center;}
 .tdot{width:5px;height:5px;border-radius:50%;background:var(--g3);opacity:.3;animation:tb 1.2s infinite;}
 .tdot:nth-child(2){animation-delay:.2s}.tdot:nth-child(3){animation-delay:.4s}
 @keyframes tb{0%,80%,100%{opacity:.2}40%{opacity:.9}}
 .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
-.chip{font-size:11.5px;padding:4px 10px;border:0.5px solid var(--border2);border-radius:99px;background:var(--card);color:var(--ink2);cursor:pointer;transition:all .12s;}
+.chip{font-size:11.5px;padding:4px 10px;border:.5px solid var(--border2);border-radius:99px;background:var(--card);color:var(--ink2);cursor:pointer;}
 .chip:hover{background:var(--gl);border-color:var(--g3);color:var(--g2);}
 .input-row{display:flex;gap:8px;}
-.input-row input{flex:1;font-family:'Noto Sans TC',sans-serif;font-size:13.5px;padding:10px 13px;border:0.5px solid var(--border2);border-radius:var(--rs);background:var(--card);color:var(--ink);outline:none;transition:border-color .15s;}
+.input-row input{flex:1;font-family:'Noto Sans TC',sans-serif;font-size:13.5px;padding:10px 13px;border:.5px solid var(--border2);border-radius:var(--rs);background:var(--card);color:var(--ink);outline:none;}
 .input-row input:focus{border-color:var(--g3);}
 .send-btn{padding:10px 18px;background:var(--g2);color:#fff;font-size:13.5px;border:none;border-radius:var(--rs);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
-.send-btn:hover{background:var(--g1);}
 .send-btn:disabled{opacity:.4;cursor:default;}
-
 /* Forms */
-.form-card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:10px;animation:up .25s ease;}
-.form-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:0.5px solid var(--border);}
+.form-card{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:10px;animation:up .25s ease;}
+.form-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:.5px solid var(--border);}
 .form-title{font-size:14px;font-weight:500;}
-.form-close{font-size:18px;cursor:pointer;color:var(--ink3);line-height:1;border:none;background:none;}
+.form-close{font-size:18px;cursor:pointer;color:var(--ink3);border:none;background:none;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .field{display:flex;flex-direction:column;gap:4px;}
 .field.full{grid-column:1/-1;}
 .field label{font-size:11.5px;color:var(--ink2);}
-.field label .req{color:#e05;}
-.field input,.field select,.field textarea{font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 10px;border:0.5px solid var(--border2);border-radius:var(--rs);background:var(--gp);color:var(--ink);outline:none;width:100%;transition:border-color .15s;}
+.req{color:#e05;}
+.field input,.field select,.field textarea{font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:8px 10px;border:.5px solid var(--border2);border-radius:var(--rs);background:var(--gp);color:var(--ink);outline:none;width:100%;}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--g3);background:#fff;}
 .field textarea{resize:vertical;min-height:64px;}
 .form-actions{display:flex;gap:8px;margin-top:14px;}
-.btn-primary{padding:9px 20px;background:var(--g2);color:#fff;font-size:13px;font-weight:500;border:none;border-radius:var(--rs);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
-.btn-primary:hover{background:var(--g1);}
-.btn-ghost{padding:9px 16px;background:transparent;color:var(--ink2);font-size:13px;border:0.5px solid var(--border2);border-radius:var(--rs);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
-
-/* Salary result */
-.result-card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:10px;animation:up .25s ease;}
-.result-title{font-size:14px;font-weight:500;margin-bottom:14px;}
-.salary-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.btn-p{padding:9px 20px;background:var(--g2);color:#fff;font-size:13px;font-weight:500;border:none;border-radius:var(--rs);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+.btn-p:hover{background:var(--g1);}
+.btn-g{padding:9px 16px;background:transparent;color:var(--ink2);font-size:13px;border:.5px solid var(--border2);border-radius:var(--rs);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+.btn-r{padding:9px 16px;background:transparent;color:#dc2626;font-size:13px;border:.5px solid #fca5a5;border-radius:var(--rs);cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+/* Alerts */
+.alert{border-radius:var(--rs);padding:10px 14px;font-size:13px;margin-bottom:10px;display:flex;align-items:center;gap:8px;animation:up .2s ease;}
+.alert.success{background:var(--gl);border:.5px solid rgba(61,122,53,.2);color:var(--g2);}
+.alert.error{background:#fef2f2;border:.5px solid #fca5a5;color:#dc2626;}
+.alert.warn{background:#fffbeb;border:.5px solid #fde68a;color:#92400e;}
+/* Leave list */
+.leave-list{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px;}
+.leave-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:.5px solid var(--border);}
+.leave-item:last-child{border-bottom:none;}
+.leave-badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500;white-space:nowrap;}
+.b-pending{background:#fef3c7;color:#92400e;}
+.b-approved{background:var(--gl);color:var(--g2);}
+.b-rejected{background:#fef2f2;color:#dc2626;}
+.leave-info{flex:1;min-width:0;}
+.leave-type{font-size:13px;font-weight:500;}
+.leave-meta{font-size:11.5px;color:var(--ink2);margin-top:2px;}
+/* Salary */
+.salary-sec{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:10px;}
+.sec-title{font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:12px;}
+.s-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
 .s-metric{background:var(--gp);border-radius:var(--rs);padding:10px 12px;}
 .s-metric-label{font-size:11px;color:var(--ink2);margin-bottom:3px;}
-.s-metric-val{font-size:18px;font-weight:500;color:var(--ink);}
+.s-metric-val{font-size:18px;font-weight:500;}
 .s-metric-val.deduct{color:#dc2626;}
 .s-metric-val.net{color:var(--g2);font-size:22px;}
 .s-metric.full{grid-column:1/-1;background:var(--gl);}
-.detail-table{width:100%;border-collapse:collapse;font-size:12.5px;}
-.detail-table tr td{padding:5px 0;color:var(--ink2);border-bottom:0.5px solid var(--border);}
-.detail-table tr td:last-child{text-align:right;font-weight:500;color:var(--ink);}
-.detail-table tr:last-child td{border-bottom:none;}
-
-/* Success / error bars */
-.success-bar{background:var(--gl);border:0.5px solid rgba(61,122,53,0.2);border-radius:var(--rs);padding:10px 14px;font-size:13px;color:var(--g2);margin-bottom:10px;display:flex;align-items:center;gap:8px;animation:up .2s ease;}
-.error-bar{background:#fef2f2;border:0.5px solid #fca5a5;border-radius:var(--rs);padding:10px 14px;font-size:13px;color:#991b1b;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-
-/* Salary section */
-.salary-section{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:10px;}
-.section-title{font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:12px;}
-
-/* Rules tab */
-.rules-box{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:10px;}
-.rules-textarea{width:100%;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:12px;border:0.5px solid var(--border2);border-radius:var(--rs);background:var(--gp);color:var(--ink);min-height:120px;resize:vertical;outline:none;}
-.rules-textarea:focus{border-color:var(--g3);background:#fff;}
-
-/* Password overlay */
-.pw-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:100;}
-.pw-card{background:var(--card);border-radius:var(--r);padding:28px;width:320px;text-align:center;}
-.pw-icon{font-size:32px;margin-bottom:12px;}
-.pw-title{font-size:16px;font-weight:500;margin-bottom:6px;}
-.pw-sub{font-size:12.5px;color:var(--ink2);margin-bottom:18px;}
-.pw-input{width:100%;font-family:'Noto Sans TC',sans-serif;font-size:15px;padding:10px 14px;border:0.5px solid var(--border2);border-radius:var(--rs);background:var(--gp);color:var(--ink);outline:none;text-align:center;letter-spacing:4px;margin-bottom:12px;}
-.pw-input:focus{border-color:var(--g3);}
-.pw-btn{width:100%;padding:10px;background:var(--g2);color:#fff;font-size:14px;font-weight:500;border:none;border-radius:var(--rs);cursor:pointer;font-family:'Noto Sans TC',sans-serif;margin-bottom:8px;}
-.pw-btn:hover{background:var(--g1);}
+.dtable{width:100%;border-collapse:collapse;font-size:12.5px;}
+.dtable td{padding:5px 0;color:var(--ink2);border-bottom:.5px solid var(--border);}
+.dtable td:last-child{text-align:right;font-weight:500;color:var(--ink);}
+.dtable tr:last-child td{border-bottom:none;}
+/* Admin approve */
+.approve-card{background:var(--card);border:.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px;}
+.approve-item{padding:12px;border:.5px solid var(--border);border-radius:var(--rs);margin-bottom:8px;}
+.approve-name{font-size:14px;font-weight:500;margin-bottom:4px;}
+.approve-meta{font-size:12px;color:var(--ink2);margin-bottom:8px;}
+.approve-actions{display:flex;gap:6px;align-items:center;}
+.approve-actions input{flex:1;font-size:12px;padding:6px 10px;border:.5px solid var(--border2);border-radius:6px;background:var(--gp);color:var(--ink);outline:none;font-family:'Noto Sans TC',sans-serif;}
+.btn-approve{padding:6px 14px;background:var(--g2);color:#fff;font-size:12px;border:none;border-radius:6px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+.btn-reject{padding:6px 14px;background:transparent;color:#dc2626;font-size:12px;border:.5px solid #fca5a5;border-radius:6px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;}
+/* PW overlay */
+.pw-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:100;}
+.pw-card{background:var(--card);border-radius:var(--r);padding:28px;width:300px;text-align:center;}
+.pw-input{width:100%;font-family:'Noto Sans TC',sans-serif;font-size:15px;padding:10px 14px;border:.5px solid var(--border2);border-radius:var(--rs);background:var(--gp);color:var(--ink);outline:none;text-align:center;letter-spacing:4px;margin-bottom:10px;}
+.pw-btn{width:100%;padding:10px;background:var(--g2);color:#fff;font-size:14px;border:none;border-radius:var(--rs);cursor:pointer;font-family:'Noto Sans TC',sans-serif;margin-bottom:6px;}
+.pw-err{font-size:12px;color:#dc2626;min-height:16px;margin-bottom:6px;}
 .pw-cancel{font-size:12px;color:var(--ink3);cursor:pointer;background:none;border:none;font-family:'Noto Sans TC',sans-serif;}
-.pw-error{font-size:12px;color:#dc2626;margin-bottom:8px;min-height:16px;}
-
-/* Admin indicator */
-.admin-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 7px;border-radius:99px;background:rgba(255,200,50,0.12);color:rgba(255,200,50,0.9);border:0.5px solid rgba(255,200,50,0.25);margin-left:6px;}
-
-@media(max-width:640px){.sidebar{display:none;}.layout{padding:10px;}.grid2{grid-template-columns:1fr;}}
+@media(max-width:640px){.sidebar{display:none;}.layout{padding:10px;}.grid2{grid-template-columns:1fr;}.s-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -153,7 +131,7 @@ header{background:var(--g1);height:56px;display:flex;align-items:center;padding:
     <div class="h-sub"><span class="online-dot"></span>上班中</div>
   </div>
   <div class="h-right">
-    <button class="admin-btn" id="admin-toggle-btn" onclick="toggleAdminMode()">主管登入</button>
+    <button class="admin-btn" id="admin-btn" onclick="toggleAdmin()">主管登入</button>
   </div>
 </header>
 
@@ -162,52 +140,54 @@ header{background:var(--g1);height:56px;display:flex;align-items:center;padding:
     <div class="s-card">
       <div class="s-av">🤖</div>
       <div class="s-name">Emma</div>
-      <div class="s-role">行政助理・人資部</div>
+      <div class="s-role">行政助理・管理部</div>
       <div class="s-div"></div>
-      <div class="s-item">📋 請假申請與登錄</div>
-      <div class="s-item">📧 自動通知主管</div>
-      <div class="s-item" id="sidebar-admin-items" style="display:none;">
-        💰 薪資計算與勞健保<br>
-        <span class="lock-badge">🔒 主管專用</span>
-      </div>
+      <div class="s-item">📋 請假申請（小時制）</div>
+      <div class="s-item">🔍 查詢自己的申請</div>
+      <div class="s-item">📧 簽核結果 Email 通知</div>
     </div>
     <div class="s-card">
-      <div class="s-item">🟢 年假：依年資計算</div>
-      <div class="s-item">🔴 病假：30天/年（半薪）</div>
-      <div class="s-item">🟠 事假：14天/年（無薪）</div>
-      <div class="s-item">📅 發薪日：每月10日</div>
+      <div class="s-item">📅 請假單位：1小時起</div>
+      <div class="s-item">🟢 全薪病假・年假・生理假</div>
+      <div class="s-item">🟡 半薪病假</div>
+      <div class="s-item">🟠 事假（無薪）</div>
+      <div class="s-item">💰 發薪日：每月10日</div>
     </div>
   </aside>
 
   <main class="main">
-    <!-- 員工用：只有聊天頁籤 -->
-    <div id="employee-nav" class="tab-nav">
-      <button class="tab-btn active">💬 跟 Emma 說話</button>
+    <!-- 員工 Tab -->
+    <div id="emp-nav" class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('chat',this,'emp-nav')">💬 跟 Emma 說話</button>
+      <button class="tab-btn" onclick="switchTab('my-leaves',this,'emp-nav')">📋 我的請假</button>
     </div>
-
-    <!-- 主管用：完整頁籤（預設隱藏）-->
+    <!-- 主管 Tab -->
     <div id="admin-nav" class="tab-nav" style="display:none;">
-      <button class="tab-btn active" onclick="switchTab('chat', this)">💬 跟 Emma 說話</button>
-      <button class="tab-btn" onclick="switchTab('salary', this)">💰 薪資計算</button>
-      <button class="tab-btn" onclick="switchTab('rules', this)">📖 更新規定</button>
+      <button class="tab-btn active" onclick="switchTab('chat',this,'admin-nav')">💬 對話</button>
+      <button class="tab-btn" onclick="loadAllLeaves();switchTab('approve',this,'admin-nav')">✅ 簽核</button>
+      <button class="tab-btn" onclick="switchTab('salary',this,'admin-nav')">💰 薪資</button>
+      <button class="tab-btn" onclick="switchTab('rules',this,'admin-nav')">📖 規定</button>
+      <button class="tab-btn" onclick="loadSlips();switchTab('slips',this,'admin-nav')">📄 薪資條</button>
+      <button class="tab-btn" onclick="loadSlips();switchTab('slips',this,'admin-nav')">📄 薪資條</button>
     </div>
 
-    <!-- Tab 1: 聊天 -->
+    <!-- Chat -->
     <div class="tab-panel active" id="tab-chat">
       <div class="chat-box" id="chat-box">
         <div class="msg ai">
           <div class="m-av">E</div>
           <div>
-            <div class="bubble">嗨！我是 Emma 👋 我可以幫你處理 <strong>請假申請</strong>，填完表單後會自動登錄並通知主管！<br><br>請問需要什麼協助？</div>
+            <div class="bubble">嗨！我是 Emma 👋 我可以幫你：<br>・<strong>請假申請</strong>（小時制，最小1小時）<br>・<strong>查詢自己的申請狀態</strong><br><br>申請請假時需要輸入公司 Email 來驗證身分喔！</div>
             <div class="chips">
-              <span class="chip" onclick="q('我想申請請假')">我想申請請假</span>
-              <span class="chip" onclick="q('病假要怎麼計算？')">病假怎麼算？</span>
-              <span class="chip" onclick="q('年假還剩幾天？')">年假規定</span>
+              <span class="chip" onclick="q('我想申請請假')">申請請假</span>
+              <span class="chip" onclick="q('假別有哪些？')">假別說明</span>
+              <span class="chip" onclick="q('生理假怎麼申請？')">生理假規定</span>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- 請假表單 -->
       <div id="leave-form" style="display:none;">
         <div class="form-card">
           <div class="form-head">
@@ -215,307 +195,492 @@ header{background:var(--g1);height:56px;display:flex;align-items:center;padding:
             <button class="form-close" onclick="document.getElementById('leave-form').style.display='none'">×</button>
           </div>
           <div class="grid2">
-            <div class="field"><label>姓名 <span class="req">*</span></label><input id="lf-name" placeholder="請輸入姓名"></div>
+            <div class="field"><label>姓名 <span class="req">*</span></label><input id="lf-name" placeholder="請輸入真實姓名"></div>
+            <div class="field"><label>公司 Email <span class="req">*</span></label><input id="lf-email" type="email" placeholder="用於身分驗證及收通知"></div>
             <div class="field"><label>部門 <span class="req">*</span></label>
-              <select id="lf-dept"><option value="">-- 選擇部門 --</option><option>工程部</option><option>設計部</option><option>業務部</option><option>行銷部</option><option>財務部</option><option>人資部</option><option>管理部</option><option>其他</option></select>
+              <select id="lf-dept">
+                <option value="">-- 選擇部門 --</option>
+                <option>設計部</option><option>行政部</option><option>工程部</option><option>管理部</option>
+              </select>
             </div>
-            <div class="field full"><label>請假類型 <span class="req">*</span></label>
-              <select id="lf-type"><option value="">-- 選擇假別 --</option><option>年假</option><option>病假</option><option>事假</option><option>婚假</option><option>喪假</option><option>產假</option><option>陪產假</option><option>公假</option></select>
+            <div class="field"><label>請假類型 <span class="req">*</span></label>
+              <select id="lf-type">
+                <option value="">-- 選擇假別 --</option>
+                <option>年假</option><option>全薪病假</option><option>半薪病假</option>
+                <option>事假</option><option>生理假</option><option>婚假</option>
+                <option>喪假</option><option>產假</option><option>陪產假</option><option>公假</option>
+              </select>
             </div>
-            <div class="field"><label>開始日期 <span class="req">*</span></label><input id="lf-start" type="date"></div>
-            <div class="field"><label>結束日期 <span class="req">*</span></label><input id="lf-end" type="date"></div>
-            <div class="field"><label>請假天數 <span class="req">*</span></label><input id="lf-days" type="number" min="0.5" step="0.5" placeholder="例：1.5"></div>
+            <div class="field"><label>請假日期 <span class="req">*</span></label><input id="lf-date" type="date"></div>
+            <div class="field"><label>請假時數（小時）<span class="req">*</span></label>
+              <select id="lf-hours">
+                <option value="">-- 選擇時數 --</option>
+                <option value="1">1 小時</option><option value="2">2 小時</option>
+                <option value="3">3 小時</option><option value="4">4 小時（半天）</option>
+                <option value="5">5 小時</option><option value="6">6 小時</option>
+                <option value="7">7 小時</option><option value="8">8 小時（全天）</option>
+              </select>
+            </div>
             <div class="field"><label>代理人</label><input id="lf-proxy" placeholder="代理人姓名（選填）"></div>
             <div class="field full"><label>請假原因</label><textarea id="lf-reason" placeholder="請填寫原因（病假請附說明）"></textarea></div>
           </div>
+          <div id="lf-alert" style="display:none;margin-top:10px;"></div>
           <div class="form-actions">
-            <button class="btn-primary" onclick="submitLeave()">送出申請</button>
-            <button class="btn-ghost" onclick="document.getElementById('leave-form').style.display='none'">取消</button>
+            <button class="btn-p" onclick="submitLeave()">送出申請</button>
+            <button class="btn-g" onclick="document.getElementById('leave-form').style.display='none'">取消</button>
           </div>
         </div>
       </div>
 
-      <div id="chat-success" style="display:none;" class="success-bar"><span>✅</span><span id="chat-success-text"></span></div>
-
+      <div id="chat-alert" style="display:none;"></div>
       <div class="input-row">
-        <input id="chat-input" placeholder="跟 Emma 說你要請假，或詢問假別規定…" onkeydown="if(event.key==='Enter')send()">
+        <input id="chat-input" placeholder="跟 Emma 說你要請假…" onkeydown="if(event.key==='Enter')send()">
         <button class="send-btn" id="send-btn" onclick="send()">送出</button>
       </div>
     </div>
 
-    <!-- Tab 2: 薪資計算（主管專用）-->
+    <!-- 我的請假 -->
+    <div class="tab-panel" id="tab-my-leaves">
+      <div class="form-card">
+        <div class="form-title" style="margin-bottom:12px;">🔍 查詢我的請假紀錄</div>
+        <div class="grid2">
+          <div class="field"><label>姓名 <span class="req">*</span></label><input id="my-name" placeholder="請輸入姓名"></div>
+          <div class="field"><label>公司 Email <span class="req">*</span></label><input id="my-email" type="email" placeholder="驗證用"></div>
+        </div>
+        <div class="form-actions" style="margin-top:12px;">
+          <button class="btn-p" onclick="loadMyLeaves()">查詢</button>
+        </div>
+      </div>
+      <div id="my-leaves-result"></div>
+    </div>
+
+    <!-- 主管簽核 -->
+    <div class="tab-panel" id="tab-approve">
+      <div id="approve-list" class="approve-card">
+        <div style="font-size:14px;font-weight:500;margin-bottom:12px;">✅ 待審核申請</div>
+        <div id="approve-items"><div style="font-size:13px;color:var(--ink2);">載入中…</div></div>
+      </div>
+    </div>
+
+    <!-- 薪資計算 -->
     <div class="tab-panel" id="tab-salary">
-      <div class="salary-section">
-        <div class="section-title">🔒 員工薪資計算（主管專用）</div>
+      <div class="salary-sec">
+        <div class="sec-title">💰 員工薪資計算（主管專用）</div>
         <div class="grid2">
           <div class="field"><label>員工姓名 <span class="req">*</span></label><input id="sf-name" placeholder="需與員工資料庫相符"></div>
           <div class="field"><label>計算年月 <span class="req">*</span></label><input id="sf-ym" type="month"></div>
           <div class="field"><label>結案獎金（元）</label><input id="sf-bonus" type="number" placeholder="0" min="0"></div>
           <div class="field"><label>其他扣除（元）</label><input id="sf-other" type="number" placeholder="0" min="0"></div>
-          <div class="field full"><label>備註</label><input id="sf-note" placeholder="例：試用期 / 特殊調整"></div>
+          <div class="field full"><label>備註</label><input id="sf-note" placeholder="特殊調整說明"></div>
         </div>
-        <div class="form-actions" style="margin-top:14px;">
-          <button class="btn-primary" onclick="calcSalary()">計算薪資</button>
-        </div>
+        <div class="form-actions" style="margin-top:14px;"><button class="btn-p" onclick="calcSalary()">計算薪資</button></div>
       </div>
-      <div id="salary-loading" style="display:none;" class="success-bar"><span>⏳</span><span>計算中，查詢員工資料與請假紀錄…</span></div>
-      <div id="salary-result" style="display:none;" class="result-card">
-        <div class="result-title" id="r-title">薪資明細</div>
-        <div class="salary-grid">
+      <div id="salary-loading" style="display:none;" class="alert success">⏳ 計算中…</div>
+      <div id="salary-result" style="display:none;" class="salary-sec">
+        <div class="s-grid">
           <div class="s-metric"><div class="s-metric-label">底薪</div><div class="s-metric-val" id="r-base">—</div></div>
           <div class="s-metric"><div class="s-metric-label">結案獎金</div><div class="s-metric-val" id="r-bonus">—</div></div>
           <div class="s-metric"><div class="s-metric-label">請假扣薪</div><div class="s-metric-val deduct" id="r-deduct">—</div></div>
           <div class="s-metric"><div class="s-metric-label">應發薪資</div><div class="s-metric-val" id="r-gross">—</div></div>
           <div class="s-metric full"><div class="s-metric-label">💰 實領薪資</div><div class="s-metric-val net" id="r-net">—</div></div>
         </div>
-        <table class="detail-table">
+        <table class="dtable">
           <tr><td>勞保員工自付</td><td id="r-labor">—</td></tr>
-          <tr><td>健保員工自付（含眷屬 <span id="r-dep">0</span> 人）</td><td id="r-health">—</td></tr>
-          <tr><td>勞退提撥（公司負擔）</td><td id="r-ret">—</td></tr>
+          <tr><td>健保員工自付</td><td id="r-health">—</td></tr>
+          <tr><td>勞退提撥（公司）</td><td id="r-ret">—</td></tr>
           <tr><td>其他扣除</td><td id="r-other">—</td></tr>
-          <tr><td>請假天數（事假 <span id="r-ev">0</span> 天 / 病假 <span id="r-sk">0</span> 天）</td><td id="r-ldays">—</td></tr>
+          <tr><td>請假（事假 <span id="r-eh">0</span>h / 半薪病假 <span id="r-sh">0</span>h）</td><td id="r-lh">—</td></tr>
         </table>
         <p style="font-size:11px;color:var(--ink3);margin-top:10px;">已儲存至 Notion 薪資計算紀錄（草稿）</p>
       </div>
-      <div id="salary-error" style="display:none;" class="error-bar"><span>⚠️</span><span id="salary-error-text"></span></div>
+      <div id="salary-error" style="display:none;" class="alert error">⚠️ <span id="salary-err-txt"></span></div>
     </div>
 
-    <!-- Tab 3: 更新規定（主管專用）-->
+    <!-- 更新規定 -->
     <div class="tab-panel" id="tab-rules">
-      <div class="rules-box">
-        <div class="section-title" style="margin-bottom:8px;">🔒 告訴 Emma 公司的假別規定（主管專用）</div>
-        <p style="font-size:12.5px;color:var(--ink2);margin-bottom:12px;line-height:1.7;">
-          用自然語言輸入即可，例如：「年假改成：1年7天，3年10天，10年以上30天」<br>
-          Emma 會自動解析並更新系統規定。
-        </p>
-        <textarea class="rules-textarea" id="rules-input" placeholder="輸入公司假別規定或薪資政策…&#10;&#10;例如：&#10;・年假依年資：1年7天、3年10天、5年14天&#10;・事假每年14天，無薪&#10;・病假30天，半薪，需附診斷書&#10;・結案獎金由主管核定"></textarea>
-        <div class="form-actions" style="margin-top:12px;">
-          <button class="btn-primary" onclick="updateRules()">通知 Emma 更新規定</button>
-        </div>
+      <div class="salary-sec">
+        <div class="sec-title" style="margin-bottom:8px;">📖 告訴 Emma 公司規定（主管專用）</div>
+        <p style="font-size:12.5px;color:var(--ink2);margin-bottom:12px;line-height:1.7;">直接用中文說即可，例如「年假改成1年10天、3年15天」<br>Emma 會自動更新知識庫。</p>
+        <textarea id="rules-input" style="width:100%;font-family:'Noto Sans TC',sans-serif;font-size:13px;padding:12px;border:.5px solid var(--border2);border-radius:var(--rs);background:var(--gp);color:var(--ink);min-height:100px;resize:vertical;outline:none;" placeholder="輸入假別規定或薪資政策…"></textarea>
+        <div class="form-actions" style="margin-top:12px;"><button class="btn-p" onclick="updateRules()">通知 Emma 更新</button></div>
       </div>
-      <div id="rules-result" style="display:none;" class="success-bar"><span>✅</span><span id="rules-result-text"></span></div>
+      <div id="rules-ok" style="display:none;" class="alert success">✅ Emma 已收到，知識庫已更新！</div>
     </div>
+  
+    <!-- 薪資條管理 -->
+    <div class="tab-panel" id="tab-slips">
+      <div class="salary-sec">
+        <div class="sec-title">📄 生成薪資條（主管專用）</div>
+        <div class="grid2">
+          <div class="field"><label>員工姓名 <span class="req">*</span></label><input id="slip-name" placeholder="需與員工資料庫相符"></div>
+          <div class="field"><label>計算年月 <span class="req">*</span></label><input id="slip-ym" type="month"></div>
+          <div class="field"><label>結案獎金（元）</label><input id="slip-bonus" type="number" placeholder="0" min="0"></div>
+          <div class="field"><label>其他扣除（元）</label><input id="slip-other" type="number" placeholder="0" min="0"></div>
+        </div>
+        <div class="form-actions" style="margin-top:14px;"><button class="btn-p" onclick="genSlip()">生成薪資條</button></div>
+      </div>
+      <div id="slip-preview" style="display:none;" class="salary-sec">
+        <div class="sec-title">預覽薪資條</div>
+        <div id="slip-preview-content"></div>
+        <div class="form-actions" style="margin-top:14px;">
+          <button class="btn-p" id="slip-send-btn" onclick="sendSlip()">✅ 審核通過・發送給員工</button>
+          <button class="btn-g" onclick="document.getElementById('slip-preview').style.display='none'">取消</button>
+        </div>
+        <p style="font-size:11px;color:var(--ink3);margin-top:8px;">發送後員工將收到 Email，內含薪資明細與回簽連結。</p>
+      </div>
+      <div class="salary-sec" style="margin-top:4px;">
+        <div class="sec-title">所有薪資條紀錄</div>
+        <div id="slip-list"><div style="font-size:13px;color:var(--ink2);">點選「薪資條」頁籤後自動載入</div></div>
+      </div>
+    </div>
+
   </main>
 </div>
 
-<!-- 密碼輸入 Overlay -->
+<!-- PW Overlay -->
 <div id="pw-overlay" class="pw-overlay" style="display:none;">
   <div class="pw-card">
-    <div class="pw-icon">🔐</div>
-    <div class="pw-title">主管登入</div>
-    <div class="pw-sub">請輸入主管密碼以進入管理功能</div>
-    <input class="pw-input" id="pw-input" type="password" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPassword()">
-    <div class="pw-error" id="pw-error"></div>
-    <button class="pw-btn" onclick="checkPassword()">確認登入</button>
-    <button class="pw-cancel" onclick="closePwOverlay()">取消</button>
+    <div style="font-size:28px;margin-bottom:10px;">🔐</div>
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">主管登入</div>
+    <div style="font-size:12px;color:var(--ink2);margin-bottom:16px;">請輸入主管密碼</div>
+    <input class="pw-input" id="pw-input" type="password" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPw()">
+    <div class="pw-err" id="pw-err"></div>
+    <button class="pw-btn" onclick="checkPw()">確認</button>
+    <button class="pw-cancel" onclick="closePw()">取消</button>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════
-// ⚙️ 設定區（填入你的資訊）
+// ══════════════════════════════════════
 const WORKER_URL = 'https://emma.akiqiori.workers.dev';
-const ADMIN_PASSWORD = 'emma2025';  // ← 可以改成你自己的密碼
-// ══════════════════════════════════════════
+const ADMIN_PW   = 'emma2025'; // 可自行修改
+// ══════════════════════════════════════
 
 let isAdmin = false;
 const history = [];
 
-// ── 主管模式切換 ────────────────────────────
-function toggleAdminMode() {
-  if (isAdmin) {
-    // 已登入 → 登出
-    isAdmin = false;
-    document.getElementById('admin-nav').style.display = 'none';
-    document.getElementById('employee-nav').style.display = 'flex';
-    document.getElementById('admin-toggle-btn').textContent = '主管登入';
-    document.getElementById('admin-toggle-btn').classList.remove('active');
-    document.getElementById('admin-tag').style.display = 'none';
-    document.getElementById('sidebar-admin-items').style.display = 'none';
-    switchTab('chat', null);
+// ── Admin ───────────────────────────────
+function toggleAdmin() {
+  if (isAdmin) { logoutAdmin(); return; }
+  document.getElementById('pw-overlay').style.display='flex';
+  setTimeout(()=>document.getElementById('pw-input').focus(),100);
+}
+function checkPw() {
+  if (document.getElementById('pw-input').value === ADMIN_PW) {
+    isAdmin=true;
+    document.getElementById('pw-overlay').style.display='none';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-err').textContent='';
+    document.getElementById('admin-nav').style.display='flex';
+    document.getElementById('emp-nav').style.display='none';
+    document.getElementById('admin-btn').textContent='登出主管';
+    document.getElementById('admin-btn').classList.add('active');
+    document.getElementById('admin-tag').style.display='inline-flex';
   } else {
-    // 未登入 → 顯示密碼框
-    document.getElementById('pw-overlay').style.display = 'flex';
-    setTimeout(() => document.getElementById('pw-input').focus(), 100);
+    document.getElementById('pw-err').textContent='密碼錯誤';
+    document.getElementById('pw-input').value='';
   }
 }
-
-function checkPassword() {
-  const val = document.getElementById('pw-input').value;
-  if (val === ADMIN_PASSWORD) {
-    isAdmin = true;
-    document.getElementById('pw-overlay').style.display = 'none';
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-error').textContent = '';
-    // 顯示主管介面
-    document.getElementById('admin-nav').style.display = 'flex';
-    document.getElementById('employee-nav').style.display = 'none';
-    document.getElementById('admin-toggle-btn').textContent = '登出主管';
-    document.getElementById('admin-toggle-btn').classList.add('active');
-    document.getElementById('admin-tag').style.display = 'inline-flex';
-    document.getElementById('sidebar-admin-items').style.display = 'block';
-  } else {
-    document.getElementById('pw-error').textContent = '密碼錯誤，請再試一次';
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-input').focus();
-  }
+function logoutAdmin() {
+  isAdmin=false;
+  document.getElementById('admin-nav').style.display='none';
+  document.getElementById('emp-nav').style.display='flex';
+  document.getElementById('admin-btn').textContent='主管登入';
+  document.getElementById('admin-btn').classList.remove('active');
+  document.getElementById('admin-tag').style.display='none';
+  switchTab('chat', document.querySelector('#emp-nav .tab-btn'), 'emp-nav');
+}
+function closePw() {
+  document.getElementById('pw-overlay').style.display='none';
+  document.getElementById('pw-input').value='';
+  document.getElementById('pw-err').textContent='';
 }
 
-function closePwOverlay() {
-  document.getElementById('pw-overlay').style.display = 'none';
-  document.getElementById('pw-input').value = '';
-  document.getElementById('pw-error').textContent = '';
-}
-
-function switchTab(name, btn) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('#admin-nav .tab-btn').forEach(b => b.classList.remove('active'));
+// ── Tab ─────────────────────────────────
+function switchTab(name, btn, navId) {
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll(`#${navId} .tab-btn`).forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
-  if (btn) btn.classList.add('active');
+  if(btn) btn.classList.add('active');
 }
 
-// ── 聊天 ────────────────────────────────────
-function q(text) { document.getElementById('chat-input').value = text; send(); }
-
-function addMsg(role, html, chips) {
-  const box = document.getElementById('chat-box');
-  const wrap = document.createElement('div'); wrap.className='msg '+role;
-  const av = document.createElement('div'); av.className='m-av';
-  av.textContent = role==='ai'?'E':'我';
-  const inner = document.createElement('div');
-  const bub = document.createElement('div'); bub.className='bubble'; bub.innerHTML=html;
+// ── Chat ─────────────────────────────────
+function q(text){ document.getElementById('chat-input').value=text; send(); }
+function addMsg(role,html,chips){
+  const box=document.getElementById('chat-box');
+  const wrap=document.createElement('div'); wrap.className='msg '+role;
+  const av=document.createElement('div'); av.className='m-av'; av.textContent=role==='ai'?'E':'我';
+  const inner=document.createElement('div');
+  const bub=document.createElement('div'); bub.className='bubble'; bub.innerHTML=html;
   inner.appendChild(bub);
-  if (chips) {
-    const cc = document.createElement('div'); cc.className='chips';
-    chips.forEach(c=>{ const b=document.createElement('span'); b.className='chip'; b.textContent=c; b.onclick=()=>q(c); cc.appendChild(b); });
-    inner.appendChild(cc);
-  }
+  if(chips){const cc=document.createElement('div');cc.className='chips';chips.forEach(c=>{const b=document.createElement('span');b.className='chip';b.textContent=c;b.onclick=()=>q(c);cc.appendChild(b);});inner.appendChild(cc);}
   wrap.appendChild(av); wrap.appendChild(role==='ai'?inner:bub);
   box.appendChild(wrap); box.scrollTop=box.scrollHeight;
   return bub;
 }
-
-function addTyping() {
+function addTyping(){
   const box=document.getElementById('chat-box');
   const d=document.createElement('div'); d.className='msg ai'; d.id='typing';
   d.innerHTML='<div class="m-av">E</div><div class="typing-bub"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>';
   box.appendChild(d); box.scrollTop=box.scrollHeight;
 }
-function rmTyping() { const e=document.getElementById('typing'); if(e)e.remove(); }
+function rmTyping(){ const e=document.getElementById('typing'); if(e)e.remove(); }
 
-async function send() {
-  const inp = document.getElementById('chat-input');
-  const text = inp.value.trim(); if(!text) return;
+async function send(){
+  const inp=document.getElementById('chat-input');
+  const text=inp.value.trim(); if(!text)return;
   inp.value=''; document.getElementById('send-btn').disabled=true;
-  addMsg('user', text);
-  history.push({role:'user', content:text});
-  addTyping();
-  try {
-    const r = await fetch(WORKER_URL+'/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({messages:history})});
-    const d = await r.json();
-    const reply = d.reply || '抱歉，暫時無法回應。';
-    rmTyping();
-    history.push({role:'assistant', content:reply});
-    if (reply.includes('[SHOW_LEAVE_FORM]')) {
-      addMsg('ai', reply.replace('[SHOW_LEAVE_FORM]','').trim().replace(/\n/g,'<br>'));
+  addMsg('user',text); history.push({role:'user',content:text}); addTyping();
+  try{
+    const r=await fetch(WORKER_URL+'/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history})});
+    const d=await r.json(); const reply=d.reply||'抱歉，暫時無法回應。';
+    rmTyping(); history.push({role:'assistant',content:reply});
+    if(reply.includes('[SHOW_LEAVE_FORM]')){
+      addMsg('ai',reply.replace('[SHOW_LEAVE_FORM]','').trim().replace(/\n/g,'<br>'));
       document.getElementById('leave-form').style.display='block';
-      const today=new Date().toISOString().split('T')[0];
-      document.getElementById('lf-start').value=today;
-      document.getElementById('lf-end').value=today;
-    } else if (reply.includes('[SHOW_SALARY_FORM]') && isAdmin) {
-      addMsg('ai', reply.replace('[SHOW_SALARY_FORM]','').trim().replace(/\n/g,'<br>'));
-      document.querySelector('#admin-nav .tab-btn:nth-child(2)').click();
-    } else if (reply.includes('[UPDATE_RULES]') && isAdmin) {
-      addMsg('ai', reply.replace('[UPDATE_RULES]','').trim().replace(/\n/g,'<br>'));
+      document.getElementById('lf-date').value=new Date().toISOString().split('T')[0];
+    } else if(reply.includes('[SHOW_SALARY_FORM]')&&isAdmin){
+      addMsg('ai',reply.replace('[SHOW_SALARY_FORM]','').trim().replace(/\n/g,'<br>'));
       document.querySelector('#admin-nav .tab-btn:nth-child(3)').click();
+    } else if(reply.includes('[UPDATE_RULES]')&&isAdmin){
+      addMsg('ai',reply.replace('[UPDATE_RULES]','').trim().replace(/\n/g,'<br>'));
+      document.querySelector('#admin-nav .tab-btn:nth-child(4)').click();
     } else {
-      addMsg('ai', reply.replace('[SHOW_SALARY_FORM]','').replace('[UPDATE_RULES]','').replace(/\n/g,'<br>'));
+      addMsg('ai',reply.replace(/\[.*?\]/g,'').trim().replace(/\n/g,'<br>'));
     }
-  } catch(e) {
-    rmTyping(); addMsg('ai','抱歉，目前連線異常，請稍後再試 🙏');
-  }
+  }catch(e){ rmTyping(); addMsg('ai','連線異常，請稍後再試 🙏'); }
   document.getElementById('send-btn').disabled=false;
 }
 
-async function submitLeave() {
+// ── 請假申請 ──────────────────────────────
+async function submitLeave(){
   const name=document.getElementById('lf-name').value.trim();
+  const email=document.getElementById('lf-email').value.trim();
   const dept=document.getElementById('lf-dept').value;
   const type=document.getElementById('lf-type').value;
-  const start=document.getElementById('lf-start').value;
-  const end=document.getElementById('lf-end').value;
-  const days=document.getElementById('lf-days').value;
+  const date=document.getElementById('lf-date').value;
+  const hours=document.getElementById('lf-hours').value;
   const proxy=document.getElementById('lf-proxy').value.trim();
   const reason=document.getElementById('lf-reason').value.trim();
-  if(!name||!dept||!type||!start||!end||!days){ addMsg('ai','⚠️ 請填寫所有必填欄位再送出！'); return; }
-  document.getElementById('leave-form').style.display='none';
-  addMsg('ai','收到！正在登錄申請並通知主管，請稍候⋯');
-  try {
-    await fetch(WORKER_URL+'/submit-leave', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({name,dept,type,start,end,days,proxy,reason})});
-    const box=document.getElementById('chat-box');
-    const last=box.lastElementChild?.querySelector?.('.bubble');
-    if(last) last.innerHTML=`✅ 申請登錄完成！<br><strong>${name}</strong>（${dept}）${type} ${start}～${end} 共 ${days} 天<br>已通知主管審核，祝早日康復/好好休息 😊`;
-    document.getElementById('chat-success').style.display='flex';
-    document.getElementById('chat-success-text').textContent=`${name} 的${type}已成功登錄！`;
-  } catch(e) { addMsg('ai','登錄時發生錯誤，請稍後再試或直接聯繫人資。'); }
+  const alertEl=document.getElementById('lf-alert');
+  if(!name||!email||!dept||!type||!date||!hours){
+    alertEl.innerHTML='<div class="alert error">⚠️ 請填寫所有必填欄位</div>';
+    alertEl.style.display='block'; return;
+  }
+  alertEl.innerHTML='<div class="alert warn">⏳ 驗證身分並送出中…</div>';
+  alertEl.style.display='block';
+  try{
+    const r=await fetch(WORKER_URL+'/submit-leave',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,dept,type,date,hours,proxy,reason})});
+    const d=await r.json();
+    if(d.success){
+      alertEl.innerHTML='<div class="alert success">✅ 申請成功！審核結果會寄到您的 Email。</div>';
+      document.getElementById('leave-form').style.display='none';
+      addMsg('ai',`✅ <strong>${name}</strong> 的${type}申請已送出！<br>日期：${date}，時數：${hours}小時<br>審核結果將寄到 ${email} 通知你 📧`);
+    } else {
+      alertEl.innerHTML=`<div class="alert error">❌ ${d.error||'送出失敗'}</div>`;
+    }
+  }catch(e){ alertEl.innerHTML='<div class="alert error">❌ 連線錯誤，請稍後再試</div>'; }
 }
 
-async function calcSalary() {
+// ── 我的請假 ──────────────────────────────
+async function loadMyLeaves(){
+  const name=document.getElementById('my-name').value.trim();
+  const email=document.getElementById('my-email').value.trim();
+  const res=document.getElementById('my-leaves-result');
+  if(!name||!email){ res.innerHTML='<div class="alert warn">請填寫姓名和 Email</div>'; return; }
+  res.innerHTML='<div class="alert warn">⏳ 查詢中…</div>';
+  try{
+    const r=await fetch(WORKER_URL+'/my-leaves',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email})});
+    const d=await r.json();
+    if(!d.success){ res.innerHTML=`<div class="alert error">❌ ${d.error}</div>`; return; }
+    if(!d.leaves.length){ res.innerHTML='<div class="alert warn">目前沒有請假紀錄</div>'; return; }
+    const statusMap={'未開始':'pending','完成':'approved','進行中':'rejected'};
+    const statusText={'未開始':'待審核','完成':'已核准','進行中':'已退回'};
+    const items=d.leaves.map(l=>`
+      <div class="leave-item">
+        <div class="leave-badge b-${statusMap[l.status]||'pending'}">${statusText[l.status]||l.status}</div>
+        <div class="leave-info">
+          <div class="leave-type">${l.type}・${l.hours} 小時</div>
+          <div class="leave-meta">${l.date}${l.comment?'・主管意見：'+l.comment:''}</div>
+        </div>
+        ${l.status==='未開始'?`<button class="btn-r" onclick="deleteLeave('${l.id}','${email}','${name}')">刪除</button>`:''}
+      </div>`).join('');
+    res.innerHTML=`<div class="leave-list">${items}</div>`;
+  }catch(e){ res.innerHTML='<div class="alert error">❌ 連線錯誤</div>'; }
+}
+
+// ── 刪除請假 ──────────────────────────────
+async function deleteLeave(pageId,email,name){
+  if(!confirm('確定要刪除這筆請假申請嗎？'))return;
+  try{
+    const r=await fetch(WORKER_URL+'/delete-leave',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pageId,email,name})});
+    const d=await r.json();
+    if(d.success){ alert('已刪除！'); loadMyLeaves(); }
+    else alert(d.error||'刪除失敗');
+  }catch(e){ alert('連線錯誤'); }
+}
+
+// ── 主管簽核 ──────────────────────────────
+async function loadAllLeaves(){
+  const items=document.getElementById('approve-items');
+  items.innerHTML='<div style="font-size:13px;color:var(--ink2);">載入中…</div>';
+  try{
+    const r=await fetch(WORKER_URL+'/all-leaves',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})});
+    const d=await r.json();
+    if(!d.leaves?.length){ items.innerHTML='<div style="font-size:13px;color:var(--ink2);">目前沒有待審核申請 🎉</div>'; return; }
+    items.innerHTML=d.leaves.map(l=>`
+      <div class="approve-item" id="ai-${l.id}">
+        <div class="approve-name">${l.name}（${l.dept}）・${l.type}</div>
+        <div class="approve-meta">${l.date}・${l.hours} 小時${l.reason?'・'+l.reason:''}</div>
+        <div class="approve-actions">
+          <input type="text" placeholder="簽核意見（選填）" id="cm-${l.id}">
+          <button class="btn-approve" onclick="doApprove('${l.id}','approve')">核准</button>
+          <button class="btn-reject" onclick="doApprove('${l.id}','reject')">退回</button>
+        </div>
+      </div>`).join('');
+  }catch(e){ items.innerHTML='<div style="font-size:13px;color:#dc2626;">連線錯誤</div>'; }
+}
+
+async function doApprove(pageId,action){
+  const comment=document.getElementById('cm-'+pageId)?.value||'';
+  try{
+    const r=await fetch(WORKER_URL+'/approve-leave',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pageId,action,comment})});
+    const d=await r.json();
+    if(d.success){
+      const el=document.getElementById('ai-'+pageId);
+      if(el){ el.style.opacity='0.4'; el.style.pointerEvents='none'; el.querySelector('.approve-meta').textContent+=' ・ '+(action==='approve'?'✅ 已核准':'❌ 已退回'); }
+    }
+  }catch(e){ alert('操作失敗，請稍後再試'); }
+}
+
+// ── 薪資 ──────────────────────────────────
+async function calcSalary(){
   const name=document.getElementById('sf-name').value.trim();
   const ym=document.getElementById('sf-ym').value;
-  const bonus=document.getElementById('sf-bonus').value||0;
-  const other=document.getElementById('sf-other').value||0;
-  const notes=document.getElementById('sf-note').value.trim();
-  if(!name||!ym){ alert('請填寫員工姓名與計算年月！'); return; }
+  if(!name||!ym){ alert('請填寫員工姓名與年月'); return; }
   const [year,month]=ym.split('-').map(Number);
   document.getElementById('salary-loading').style.display='flex';
   document.getElementById('salary-result').style.display='none';
   document.getElementById('salary-error').style.display='none';
-  try {
-    const r=await fetch(WORKER_URL+'/calc-salary', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({name,year,month,bonus,otherDeduction:other,notes})});
+  try{
+    const r=await fetch(WORKER_URL+'/calc-salary',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,year,month,bonus:document.getElementById('sf-bonus').value||0,otherDeduction:document.getElementById('sf-other').value||0,notes:document.getElementById('sf-note').value})});
     const d=await r.json();
     document.getElementById('salary-loading').style.display='none';
-    if(!d.success){ document.getElementById('salary-error').style.display='flex'; document.getElementById('salary-error-text').textContent=d.error; return; }
-    const x=d.data;
-    const fmt=n=>'NT$ '+Math.round(n).toLocaleString();
-    document.getElementById('r-title').textContent=`${name}・${x.yearMonth} 薪資明細`;
+    if(!d.success){ document.getElementById('salary-error').style.display='flex'; document.getElementById('salary-err-txt').textContent=d.error; return; }
+    const x=d.data; const fmt=n=>'NT$ '+Math.round(n).toLocaleString();
     document.getElementById('r-base').textContent=fmt(x.baseSalary);
     document.getElementById('r-bonus').textContent=fmt(x.bonus);
-    document.getElementById('r-deduct').textContent='- '+fmt(x.leaveDeduction);
+    document.getElementById('r-deduct').textContent='- '+fmt(x.leaveDeduct);
     document.getElementById('r-gross').textContent=fmt(x.grossSalary);
     document.getElementById('r-net').textContent=fmt(x.netSalary);
     document.getElementById('r-labor').textContent='- '+fmt(x.laborInsurance);
     document.getElementById('r-health').textContent='- '+fmt(x.healthInsurance);
-    document.getElementById('r-dep').textContent=x.dependents||0;
     document.getElementById('r-ret').textContent=fmt(x.laborRetirement)+' (公司)';
     document.getElementById('r-other').textContent=x.otherDeduction>0?'- '+fmt(x.otherDeduction):'—';
-    document.getElementById('r-ev').textContent=x.eventDays||0;
-    document.getElementById('r-sk').textContent=x.sickDays||0;
-    document.getElementById('r-ldays').textContent=(x.leaveDays||0)+' 天';
+    document.getElementById('r-eh').textContent=x.eventH||0;
+    document.getElementById('r-sh').textContent=x.sickH||0;
+    document.getElementById('r-lh').textContent=((x.eventH||0)+(x.sickH||0))+' 小時';
     document.getElementById('salary-result').style.display='block';
-  } catch(e) {
+  }catch(e){
     document.getElementById('salary-loading').style.display='none';
     document.getElementById('salary-error').style.display='flex';
-    document.getElementById('salary-error-text').textContent='連線錯誤，請確認 Worker 網址設定正確。';
+    document.getElementById('salary-err-txt').textContent='連線錯誤';
   }
 }
 
-async function updateRules() {
+// ── 規定 ──────────────────────────────────
+async function updateRules(){
   const content=document.getElementById('rules-input').value.trim();
-  if(!content){ alert('請先輸入規定內容！'); return; }
-  try {
-    await fetch(WORKER_URL+'/update-rules', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content})});
-    document.getElementById('rules-result').style.display='flex';
-    document.getElementById('rules-result-text').textContent='Emma 已收到規定更新，Notion 知識庫同步完成！';
-  } catch(e) { alert('更新失敗，請稍後再試。'); }
+  if(!content){ alert('請輸入規定內容'); return; }
+  try{
+    await fetch(WORKER_URL+'/update-rules',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content})});
+    document.getElementById('rules-ok').style.display='flex';
+  }catch(e){ alert('更新失敗'); }
 }
 
-// 預設計算年月為下個月
-(function(){
-  const n=new Date();
-  const y=n.getMonth()===11?n.getFullYear()+1:n.getFullYear();
-  const m=String((n.getMonth()+2)%12||12).padStart(2,'0');
-  document.getElementById('sf-ym').value=y+'-'+m;
-})();
+
+// Salary Slip
+let currentSlipPageId = null;
+const fmtN = n => 'NT$ ' + Math.round(n).toLocaleString();
+
+async function genSlip() {
+  const name = document.getElementById('slip-name').value.trim();
+  const ym   = document.getElementById('slip-ym').value;
+  if (!name || !ym) { alert('請填寫員工姓名與年月'); return; }
+  const [year,month] = ym.split('-').map(Number);
+  const bonus = document.getElementById('slip-bonus').value || 0;
+  const other = document.getElementById('slip-other').value || 0;
+  document.getElementById('slip-preview').style.display = 'none';
+  try {
+    const r = await fetch(WORKER_URL+'/gen-salary-slip', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({name,year,month,bonus,otherDeduct:other})});
+    const d = await r.json();
+    if (!d.success) { alert('生成失敗：'+(d.error||'未知錯誤')); return; }
+    currentSlipPageId = d.pageId;
+    const x = d.slipData;
+    const leaveRows = x.leaveDetails.map(l => `<div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid #f0f0f0;"><span>${l.date} ${l.type}</span><span>${l.hours}h・${l.deductType}</span></div>`).join('');
+    document.getElementById('slip-preview-content').innerHTML = `
+      <div style="font-size:13px;">
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #f0f0f0;"><span style="color:var(--ink2);">底薪</span><span>${fmtN(x.baseSalary)}</span></div>
+        ${x.bonus>0?`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #f0f0f0;"><span style="color:var(--ink2);">結案獎金</span><span style="color:#059669;">+ ${fmtN(x.bonus)}</span></div>`:''}
+        ${x.leaveDeduct>0?`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #f0f0f0;"><span style="color:var(--ink2);">請假扣薪</span><span style="color:#dc2626;">- ${fmtN(x.leaveDeduct)}</span></div>`:''}
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #f0f0f0;"><span style="color:var(--ink2);">應發薪資</span><span>${fmtN(x.grossSalary)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #f0f0f0;"><span style="color:var(--ink2);">勞保員工負擔</span><span style="color:#dc2626;">- ${fmtN(x.laborIns)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #f0f0f0;"><span style="color:var(--ink2);">健保員工負擔</span><span style="color:#dc2626;">- ${fmtN(x.healthIns)}</span></div>
+        ${x.otherDeduct>0?`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid #f0f0f0;"><span style="color:var(--ink2);">其他扣除</span><span style="color:#dc2626;">- ${fmtN(x.otherDeduct)}</span></div>`:''}
+        <div style="display:flex;justify-content:space-between;padding:10px 6px;background:var(--gl);margin-top:4px;"><span style="font-weight:500;">實領薪資</span><span style="font-weight:500;font-size:17px;color:var(--g2);">${fmtN(x.netSalary)}</span></div>
+        ${x.leaveDetails.length>0?`<div style="margin-top:10px;"><div style="font-size:11px;font-weight:500;color:var(--g2);margin-bottom:6px;">請假明細</div>${leaveRows}</div>`:''}
+      </div>`;
+    document.getElementById('slip-preview').style.display = 'block';
+  } catch(e) { alert('連線錯誤：'+e.message); }
+}
+
+async function sendSlip() {
+  if (!currentSlipPageId) { alert('請先生成薪資條'); return; }
+  const btn = document.getElementById('slip-send-btn');
+  btn.disabled = true; btn.textContent = '發送中…';
+  try {
+    const r = await fetch(WORKER_URL+'/send-salary-slip', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({pageId:currentSlipPageId})});
+    const d = await r.json();
+    if (d.success) { btn.textContent = '✅ 已發送！'; setTimeout(()=>{ document.getElementById('slip-preview').style.display='none'; btn.disabled=false; btn.textContent='✅ 審核通過・發送給員工'; currentSlipPageId=null; loadSlips(); }, 1500); }
+    else { btn.disabled=false; btn.textContent='✅ 審核通過・發送給員工'; alert('發送失敗：'+(d.error||'')); }
+  } catch(e) { btn.disabled=false; btn.textContent='✅ 審核通過・發送給員工'; alert('連線錯誤'); }
+}
+
+async function loadSlips() {
+  const list = document.getElementById('slip-list');
+  if (!list) return;
+  list.innerHTML = '<div style="font-size:13px;color:var(--ink2);">載入中…</div>';
+  try {
+    const r = await fetch(WORKER_URL+'/pending-slips', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({})});
+    const d = await r.json();
+    if (!d.slips?.length) { list.innerHTML='<div style="font-size:13px;color:var(--ink2);">目前沒有薪資條紀錄</div>'; return; }
+    const sColor={'草稿':'#9a9a96','已審核待發':'#2563eb','已發送':'#16a34a'};
+    const rColor={'待回簽':'#d97706','已回簽':'#16a34a','逾期未簽':'#dc2626'};
+    list.innerHTML = d.slips.map(s => `
+      <div style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:0.5px solid var(--border);">
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:500;">${s.name}・${s.yearMonth}</div>
+          <div style="font-size:12px;color:var(--ink2);margin-top:2px;">${fmtN(s.netSalary)}</div>
+        </div>
+        <span style="font-size:11px;padding:2px 8px;border-radius:99px;background:#f0f0f0;color:${sColor[s.reviewStatus]||'#666'}">${s.reviewStatus}</span>
+        <span style="font-size:11px;padding:2px 8px;border-radius:99px;background:#f0f0f0;color:${rColor[s.signStatus]||'#666'}">${s.signStatus}</span>
+        ${s.reviewStatus==='草稿'?`<button style="font-size:11px;padding:4px 10px;background:var(--g2);color:#fff;border:none;border-radius:6px;cursor:pointer;" onclick="sendSlipById('${s.id}')">發送</button>`:''}
+      </div>`).join('');
+  } catch(e) { list.innerHTML='<div style="font-size:13px;color:#dc2626;">連線錯誤</div>'; }
+}
+
+async function sendSlipById(pageId) {
+  if (!confirm('確定要發送此薪資條給員工嗎？')) return;
+  try {
+    const r = await fetch(WORKER_URL+'/send-salary-slip', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({pageId})});
+    const d = await r.json();
+    if (d.success) { alert('已發送！'); loadSlips(); }
+    else alert('發送失敗：'+(d.error||''));
+  } catch(e) { alert('連線錯誤'); }
+}
+
+// 預設年月
+(function(){ const n=new Date(); const y=n.getMonth()===11?n.getFullYear()+1:n.getFullYear(); const m=String((n.getMonth()+2)%12||12).padStart(2,'0'); document.getElementById('sf-ym').value=y+'-'+m; if(document.getElementById('slip-ym'))document.getElementById('slip-ym').value=y+'-'+m; })();
 </script>
 </body>
 </html>

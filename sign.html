@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>薪資條回簽｜Emma 行政助理</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',sans-serif;background:#f8f7f2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+.card{background:#fff;border-radius:14px;overflow:hidden;max-width:480px;width:100%;border:0.5px solid rgba(0,0,0,0.08);box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+.header{background:#1e3a1a;padding:20px 24px;}
+.header-sub{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px;}
+.header-title{font-size:17px;font-weight:500;color:#fff;}
+.body{padding:24px;}
+.loading{text-align:center;padding:30px;color:#5a5a56;font-size:14px;}
+.slip-info{margin-bottom:20px;}
+.slip-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid #f0f0f0;font-size:13.5px;}
+.slip-row:last-child{border-bottom:none;}
+.slip-label{color:#6b6b67;}
+.slip-val{font-weight:500;}
+.net-row{background:#e8f5e3;margin:0 -24px;padding:12px 24px;display:flex;justify-content:space-between;margin-top:12px;}
+.net-label{font-size:14px;font-weight:500;color:#1e3a1a;}
+.net-val{font-size:20px;font-weight:500;color:#2d5a27;}
+.sign-btn{width:100%;padding:13px;background:#2d5a27;color:#fff;font-size:15px;font-weight:500;border:none;border-radius:9px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;margin-top:20px;}
+.sign-btn:hover{background:#1e3a1a;}
+.sign-btn:disabled{opacity:0.4;cursor:default;}
+.success-card{text-align:center;padding:30px;}
+.success-icon{font-size:48px;margin-bottom:14px;}
+.success-title{font-size:18px;font-weight:500;color:#1e3a1a;margin-bottom:6px;}
+.success-sub{font-size:13px;color:#6b6b67;line-height:1.6;}
+.error-card{text-align:center;padding:30px;}
+.error-icon{font-size:48px;margin-bottom:14px;}
+.error-title{font-size:16px;font-weight:500;color:#dc2626;margin-bottom:6px;}
+.error-sub{font-size:13px;color:#6b6b67;}
+.leave-section{margin-top:14px;background:#f9f9f9;border-radius:8px;padding:12px 14px;}
+.leave-title{font-size:11px;color:#2d5a27;font-weight:500;margin-bottom:8px;}
+.leave-item{font-size:12.5px;color:#5a5a56;padding:3px 0;border-bottom:0.5px solid #efefef;}
+.leave-item:last-child{border-bottom:none;}
+.confirm-note{font-size:12px;color:#9a9a96;line-height:1.6;margin-top:14px;padding:10px 12px;background:#f4faf2;border-radius:7px;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="header-sub">Emma 行政助理・薪資確認</div>
+    <div class="header-title">💰 薪資條回簽</div>
+  </div>
+  <div class="body" id="body">
+    <div class="loading">⏳ 載入薪資條資料中…</div>
+  </div>
+</div>
+
+<script>
+const WORKER_URL = 'https://emma.akiqiori.workers.dev';
+const params = new URLSearchParams(window.location.search);
+const token = params.get('token');
+let slipData = null;
+
+const fmt = n => 'NT$ ' + Math.round(n).toLocaleString();
+
+async function init() {
+  if (!token) { showError('連結無效', '請確認您使用的是正確的薪資條連結。'); return; }
+  // 透過 Worker 查詢薪資條（用 token 搜尋）
+  try {
+    const r = await fetch(WORKER_URL + '/get-slip-by-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    });
+    const d = await r.json();
+    if (!d.success) { showError('找不到薪資條', d.error || '請確認連結是否正確，或聯繫主管。'); return; }
+    if (d.signed) { showAlreadySigned(d.name, d.yearMonth); return; }
+    slipData = d;
+    showSlip(d);
+  } catch(e) {
+    showError('連線失敗', '無法連接到系統，請稍後再試。');
+  }
+}
+
+function showSlip(d) {
+  const leaveHtml = d.leaveDetails && d.leaveDetails.length > 0
+    ? `<div class="leave-section">
+        <div class="leave-title">📋 請假明細</div>
+        ${d.leaveDetails.map(l => `<div class="leave-item">${l.date}・${l.type}・${l.hours}小時（${l.deductType}）</div>`).join('')}
+      </div>` : '';
+
+  document.getElementById('body').innerHTML = `
+    <div class="slip-info">
+      <div style="font-size:15px;font-weight:500;margin-bottom:14px;">${d.name}・${d.yearMonth}</div>
+      <div class="slip-row"><span class="slip-label">底薪</span><span class="slip-val">${fmt(d.baseSalary)}</span></div>
+      ${d.bonus>0?`<div class="slip-row"><span class="slip-label">結案獎金</span><span class="slip-val" style="color:#059669;">+ ${fmt(d.bonus)}</span></div>`:''}
+      ${d.leaveDeduct>0?`<div class="slip-row"><span class="slip-label">請假扣薪</span><span class="slip-val" style="color:#dc2626;">- ${fmt(d.leaveDeduct)}</span></div>`:''}
+      <div class="slip-row"><span class="slip-label">應發薪資</span><span class="slip-val">${fmt(d.grossSalary)}</span></div>
+      <div class="slip-row"><span class="slip-label">勞保員工負擔</span><span class="slip-val" style="color:#dc2626;">- ${fmt(d.laborIns)}</span></div>
+      <div class="slip-row"><span class="slip-label">健保員工負擔</span><span class="slip-val" style="color:#dc2626;">- ${fmt(d.healthIns)}</span></div>
+      ${d.otherDeduct>0?`<div class="slip-row"><span class="slip-label">其他扣除</span><span class="slip-val" style="color:#dc2626;">- ${fmt(d.otherDeduct)}</span></div>`:''}
+    </div>
+    <div class="net-row"><span class="net-label">💰 實領薪資</span><span class="net-val">${fmt(d.netSalary)}</span></div>
+    ${leaveHtml}
+    <div class="confirm-note">請仔細確認以上薪資明細。點擊「確認並回簽」即表示您確認本月薪資無誤，此操作將存入人事紀錄且不可撤銷。</div>
+    <button class="sign-btn" onclick="doSign()">✅ 確認並回簽</button>
+  `;
+}
+
+async function doSign() {
+  const btn = document.querySelector('.sign-btn');
+  btn.disabled = true;
+  btn.textContent = '回簽中…';
+  try {
+    const r = await fetch(WORKER_URL + '/sign-salary-slip', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    });
+    const d = await r.json();
+    if (d.success) {
+      document.getElementById('body').innerHTML = `
+        <div class="success-card">
+          <div class="success-icon">✅</div>
+          <div class="success-title">回簽完成！</div>
+          <div class="success-sub">${d.name} 的 ${d.yearMonth} 薪資條已完成確認<br>紀錄已存入系統，主管將收到通知。</div>
+        </div>`;
+    } else {
+      btn.disabled = false;
+      btn.textContent = '確認並回簽';
+      showError('回簽失敗', d.error || '請稍後再試。');
+    }
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '確認並回簽';
+    showError('連線失敗', '請稍後再試。');
+  }
+}
+
+function showAlreadySigned(name, ym) {
+  document.getElementById('body').innerHTML = `
+    <div class="success-card">
+      <div class="success-icon">✅</div>
+      <div class="success-title">已完成回簽</div>
+      <div class="success-sub">${name} 的 ${ym} 薪資條已完成確認<br>無需重複操作。</div>
+    </div>`;
+}
+
+function showError(title, msg) {
+  document.getElementById('body').innerHTML = `
+    <div class="error-card">
+      <div class="error-icon">❌</div>
+      <div class="error-title">${title}</div>
+      <div class="error-sub">${msg}</div>
+    </div>`;
+}
+
+init();
+</script>
+</body>
+</html>
